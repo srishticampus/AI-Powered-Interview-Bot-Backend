@@ -8,7 +8,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['name', 'email', 'password', 'confirm_password', 'phone_number', 'profile_image']
+        fields = ['username', 'email', 'password', 'confirm_password', 'phone_number', 'profile_image']
 
     def validate(self, attrs):
         if attrs['password'] != attrs['confirm_password']:
@@ -18,7 +18,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('confirm_password')
         user = CustomUser.objects.create_user(
-            username=validated_data['name'],
+            username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
             phone_number=validated_data['phone_number'],
