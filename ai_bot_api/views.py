@@ -6,6 +6,8 @@ from .serializers import RegistrationSerializer
 from django.contrib.auth import authenticate
 from .models import CustomUser
 from .serializers import UserSerializer
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 
 class RegisterView(APIView):
@@ -38,4 +40,8 @@ class UserListView(APIView):
         serializer = UserSerializer(users, many=True)  
         return Response(serializer.data, status=status.HTTP_200_OK) 
 
-    
+class UserDetailView(APIView):
+    def get(self, request, user_id):
+        user = get_object_or_404(CustomUser, id=user_id)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
