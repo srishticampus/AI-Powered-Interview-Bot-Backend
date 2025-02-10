@@ -5,7 +5,7 @@ from rest_framework import status
 from .serializers import RegistrationSerializer
 from django.contrib.auth import authenticate
 from .models import CustomUser
-from .serializers import UserSerializer, AddCompanySerializer
+from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -52,4 +52,12 @@ class AddCompanyView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ResetPasswordView(APIView):
+    def post(self, request):
+        serializer = ResetPasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Password reset successful!"}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
