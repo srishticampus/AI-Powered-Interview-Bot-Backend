@@ -9,3 +9,16 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+class AddCompanies(models.Model):
+    company_name = models.CharField(max_length=255)
+    company_logo = models.ImageField(upload_to='company_logo/', blank=True, null=True)
+    company_email = models.EmailField(unique=True)
+    company_phone = models.CharField(max_length=15, unique=False)
+    industry_type = models.CharField(max_length=255)
+    district = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    website_url = models.CharField(max_length=255)
+    description = models.TextField()
+    

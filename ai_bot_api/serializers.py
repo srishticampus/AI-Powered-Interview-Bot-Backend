@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser,AddCompanies
 from django.contrib.auth.password_validation import validate_password
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -30,3 +30,8 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'email', 'phone_number', 'profile_image']
+    
+class AddCompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AddCompanies
+        fields = '__all__'

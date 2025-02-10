@@ -138,7 +138,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://hybrid.srishticampus.in/lexsi/",
-    "localhost:5174",
-    "localhost:5175",
+    "https://localhost:5174",
+    "https://localhost:5175",
 ]
