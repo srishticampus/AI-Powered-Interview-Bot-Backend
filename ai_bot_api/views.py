@@ -5,7 +5,7 @@ from rest_framework import status
 from .serializers import RegistrationSerializer
 from django.contrib.auth import authenticate
 from .models import CustomUser
-from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer
+from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -49,6 +49,14 @@ class UserDetailView(APIView):
 class AddCompanyView(APIView):
     def post(self, request):
         serializer = AddCompanySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class AddJobView(APIView):
+    def post(self, request):
+        serializer = AddJobSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

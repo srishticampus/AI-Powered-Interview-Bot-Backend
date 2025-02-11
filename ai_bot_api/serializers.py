@@ -1,18 +1,25 @@
 from rest_framework import serializers
-from .models import CustomUser,AddCompanies
+from .models import CustomUser,AddCompanies,AddJob
 from django.contrib.auth.password_validation import validate_password
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True)
+    resume = serializers.FileField(required=False, allow_null=True)
+    skills = serializers.CharField(required=False, allow_blank=True)
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password', 'confirm_password', 'phone_number', 'profile_image']
+        fields = ['username', 'email', 'password', 'confirm_password', 'phone_number', 'profile_image','resume', 'skills']
 
     def validate(self, attrs):
         if attrs['password'] != attrs['confirm_password']:
             raise serializers.ValidationError({"password": "Passwords do not match."})
+        
+        if 'resume' in attrs and attrs['resume']:
+            if not attrs['resume'].name.endswith('.pdf'):
+                raise serializers.ValidationError({"resume": "Only PDF files are allowed."})
+            
         return attrs
     
     def create(self, validated_data):
@@ -22,18 +29,25 @@ class RegistrationSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password'],
             phone_number=validated_data['phone_number'],
-            profile_image=validated_data.get('profile_image')
+            profile_image=validated_data.get('profile_image'),
+            resume=validated_data.get('resume'),
+            skills=validated_data['skills']
         )
         return user
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'username', 'email', 'phone_number', 'profile_image']
+        fields = ['id', 'username', 'email', 'phone_number', 'profile_image', 'resume', 'skills']
     
 class AddCompanySerializer(serializers.ModelSerializer):
     class Meta:
         model = AddCompanies
+        fields = '__all__'
+
+class AddJobSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AddJob
         fields = '__all__'
 
 
