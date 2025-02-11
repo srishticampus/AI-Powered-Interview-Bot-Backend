@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from .models import CustomUser
 from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer
 from django.shortcuts import get_object_or_404
+from rest_framework.authtoken.models import Token
 
 # Create your views here.
 
@@ -29,7 +30,7 @@ class LoginView(APIView):
         user = authenticate(request, username=email, password=password)
 
         if user is not None:
-            return Response({'message': 'Login successful'}, status=status.HTTP_200_OK)
+            return Response({'message': 'Login successful',"user_id": user.id}, status=status.HTTP_200_OK)
 
         return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
