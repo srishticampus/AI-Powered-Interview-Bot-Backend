@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import RegistrationSerializer
 from django.contrib.auth import authenticate
-from .models import CustomUser, AddJob
+from .models import CustomUser, AddJob, AddCompanies
 from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
@@ -90,4 +90,11 @@ class UserMatchedJobsView(APIView):
                     matching_jobs.append(job)
 
         serializer = AddJobSerializer(matching_jobs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+class CompaniesListView(APIView):
+    def get(self, request):
+        companies = AddCompanies.objects.all()
+        serializer = AddCompanySerializer(companies, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

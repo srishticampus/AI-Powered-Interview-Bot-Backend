@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView,LoginView,UserListView,UserDetailView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView
+from .views import RegisterView,LoginView,UserListView,UserDetailView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView
 
 
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
      path("reset-password/", ResetPasswordView.as_view(), name="reset-password"),
      path('addjob/', AddJobView.as_view(), name='addjob'),
      path('user/<int:user_id>/matched-jobs/', UserMatchedJobsView.as_view(), name='user-matched-jobs'),
+     path('companies/',CompaniesListView.as_view(),name='company-detail'),
 ]
