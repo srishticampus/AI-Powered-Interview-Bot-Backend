@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -41,3 +42,11 @@ class AddJob(models.Model):
     def __str__(self):
         return self.job_title
     
+class JobApplication(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    job = models.ForeignKey(AddJob, on_delete=models.CASCADE)
+    applied_at = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=25, choices=[("pending","pending"), ("accepted","accepted"), ("rejected","rejected")], default="pending")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.job.job_title}"

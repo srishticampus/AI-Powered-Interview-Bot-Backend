@@ -5,7 +5,7 @@ from rest_framework import status
 from .serializers import RegistrationSerializer
 from django.contrib.auth import authenticate
 from .models import CustomUser, AddJob, AddCompanies
-from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer
+from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer, JobApplication, JobApplicationSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
 
@@ -116,3 +116,25 @@ class JobDetailView(APIView):
             job = get_object_or_404(AddJob, id=job_id)
             serializer = AddJobSerializer(job)
             return Response(serializer.data, status=status.HTTP_200_OK)
+        
+
+class ApplyJobView(APIView):
+    def post(self, request):
+        user_id = request.data.get('user_id')
+        job_id = request.data.get('job_id')
+
+        user = get_object_or_404(CustomUser, id=user_id)
+        job = get_object_or_404(AddJob, id=job_id)
+
+        if JobApplication.objects.filter(user=user, job=job).exists():
+            return Response({'message':'already applied for this job'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        application = JobApplication.objects.create(user=user, job=job)
+        return Response({'message':'job application is submitted'}, status=status.HTTP_201_CREATED)
+    
+
+class UserAppliedJobView(APIView):
+    def get(self, request, user_id):
+        applications = JobApplication.objects.filter(user_id=user_id)
+        serializer = JobApplicationSerializer(applications, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

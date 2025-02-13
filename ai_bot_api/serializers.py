@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser,AddCompanies,AddJob
+from .models import CustomUser,AddCompanies,AddJob,JobApplication
 from django.contrib.auth.password_validation import validate_password
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -74,3 +74,9 @@ class ResetPasswordSerializer(serializers.Serializer):
         user.set_password(new_password)
         user.save()
         return user
+    
+
+class JobApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobApplication
+        fields = ['id', 'user', 'job', 'applied_at', 'status']
