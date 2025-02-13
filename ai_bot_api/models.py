@@ -49,4 +49,4 @@ class JobApplication(models.Model):
     status = models.CharField(max_length=25, choices=[("pending","pending"), ("accepted","accepted"), ("rejected","rejected")], default="pending")
 
     def __str__(self):
-        return f"{self.user.username} - {self.job.job_title}"
+        return f"{self.user.username} - {self.job.job_title}"   
