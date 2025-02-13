@@ -104,3 +104,15 @@ class CompanyDetailView(APIView):
         company = get_object_or_404(AddCompanies, id=company_id)
         serializer = AddCompanySerializer(company)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class JobsListView(APIView):
+    def get(self, request):
+        jobs = AddJob.objects.all()
+        serializer = AddJobSerializer(jobs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class JobDetailView(APIView):
+        def get(self, request, job_id):
+            job = get_object_or_404(AddJob, id=job_id)
+            serializer = AddJobSerializer(job)
+            return Response(serializer.data, status=status.HTTP_200_OK)
