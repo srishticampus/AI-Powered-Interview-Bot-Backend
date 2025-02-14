@@ -153,3 +153,9 @@ class UpdateApplicationStatusView(APIView):
         application.save()
 
         return Response({"message":f"application {new_status} successfully"}, status=status.HTTP_200_OK)
+    
+class AllAppliedjobsView(APIView):
+    def get(self, request):
+        applications = JobApplication.objects.all()
+        serializer = JobApplicationSerializer(applications, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
