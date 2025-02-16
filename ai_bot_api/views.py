@@ -174,3 +174,18 @@ class DeleteCompanyView(APIView):
         company = get_object_or_404(AddCompanies, id=company_id)
         company.delete()
         return Response({"message":"company deleted successfully"}, status=status.HTTP_200_OK)
+    
+class EditJobsView(APIView):
+    def patch(self, request, job_id):
+        job = get_object_or_404(AddJob, id=job_id)
+        serializer = AddJobSerializer(job, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class DeleteJobView(APIView):
+    def delete(self, request, job_id):
+        job = get_object_or_404(AddJob, id=job_id)
+        job.delete()
+        return Response({"message":"job deleted successfully"}, status=status.HTTP_200_OK)
