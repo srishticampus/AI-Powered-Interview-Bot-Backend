@@ -107,7 +107,7 @@ class CompanyDetailView(APIView):
     
 class JobsListView(APIView):
     def get(self, request):
-        jobs = AddJob.objects.all()
+        jobs = AddJob.objects.all().select_related('company_name')
         serializer = AddJobSerializer(jobs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     

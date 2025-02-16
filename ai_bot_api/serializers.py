@@ -46,6 +46,7 @@ class AddCompanySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class AddJobSerializer(serializers.ModelSerializer):
+    company_name = AddCompanySerializer(read_only=True)
     class Meta:
         model = AddJob
         fields = '__all__'
