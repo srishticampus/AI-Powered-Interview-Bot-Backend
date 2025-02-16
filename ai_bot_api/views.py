@@ -112,10 +112,10 @@ class JobsListView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class JobDetailView(APIView):
-        def get(self, request, job_id):
-            job = get_object_or_404(AddJob, id=job_id)
-            serializer = AddJobSerializer(job)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+    def get(self, request, job_id):
+        job = get_object_or_404(AddJob, id=job_id)
+        serializer = AddJobSerializer(job)
+        return Response(serializer.data, status=status.HTTP_200_OK)
         
 
 class ApplyJobView(APIView):
@@ -159,3 +159,18 @@ class AllAppliedjobsView(APIView):
         applications = JobApplication.objects.all()
         serializer = JobApplicationSerializer(applications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class CompanyEditView(APIView):
+    def patch(self, request, company_id):
+        company = get_object_or_404(AddCompanies, id=company_id)
+        serializer = AddCompanySerializer(company, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeleteCompanyView(APIView):
+    def delete(self, request, company_id):
+        company = get_object_or_404(AddCompanies, id=company_id)
+        company.delete()
+        return Response({"message":"company deleted successfully"}, status=status.HTTP_200_OK)
