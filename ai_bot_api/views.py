@@ -57,11 +57,14 @@ class AddCompanyView(APIView):
     
 class AddJobView(APIView):
     def post(self, request):
+        request.data["company_name"] = request.data.get("company_name") 
+
         serializer = AddJobSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     
 class ResetPasswordView(APIView):
     def post(self, request):
