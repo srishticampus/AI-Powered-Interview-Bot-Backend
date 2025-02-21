@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView,LoginView,UserListView,UserDetailView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView,CompanyDetailView,JobsListView,JobDetailView,ApplyJobView,UserAppliedJobView,UpdateApplicationStatusView,AllAppliedjobsView,CompanyEditView,DeleteCompanyView,EditJobsView,DeleteJobView
+from .views import RegisterView,LoginView,UserListView,UserDetailView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView,CompanyDetailView,JobsListView,JobDetailView,ApplyJobView,UserAppliedJobView,UpdateApplicationStatusView,AllAppliedjobsView,CompanyEditView,DeleteCompanyView,EditJobsView,DeleteJobView,generate_mcqs_from_resume, get_mcq_file
 
 
 urlpatterns = [
@@ -23,6 +23,8 @@ urlpatterns = [
      path('user-applied-job/<int:user_id>/',UserAppliedJobView.as_view(), name='user-applied-job'),
      path('update-application-status/',UpdateApplicationStatusView.as_view(), name='update-application-status'),
      path('all-applied-jobs/', AllAppliedjobsView.as_view(), name='all-applied-jobs'),
+     path("generate-mcqs/<int:user_id>/", generate_mcqs_from_resume, name="generate_mcqs"),
+
      
 
 ]

@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "question": "What is the time complexity of searching for a specific element in a sorted array using binary search?",
+        "option1": "O(n)",
+        "option2": "O(log n)",
+        "option3": "O(n^2)",
+        "option4": "O(1)",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 2,
+        "question": "Explain the difference between depth-first search (DFS) and breadth-first search (BFS).",
+        "option1": "DFS uses a queue; BFS uses a stack.",
+        "option2": "DFS uses a stack; BFS uses a queue.",
+        "option3": "Both use queues.",
+        "option4": "Both use stacks.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 3,
+        "question": "What is the purpose of a hash table (hash map)?",
+        "option1": "To sort data in ascending order.",
+        "option2": "To provide fast lookups of key-value pairs.",
+        "option3": "To implement a stack data structure.",
+        "option4": "To represent a graph.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 4,
+        "question": "What are the common causes of database deadlocks?",
+        "option1": "Using too many indexes.",
+        "option2": "Concurrent transactions with conflicting locks.",
+        "option3": "Insufficient disk space.",
+        "option4": "Network connectivity issues.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 5,
+        "question": "What is the difference between an inner join and a left outer join in SQL?",
+        "option1": "Inner join returns all rows; left outer join returns only matching rows.",
+        "option2": "Inner join returns only matching rows; left outer join returns all rows from the left table and matching rows from the right table.",
+        "option3": "Inner join uses a stack; left outer join uses a queue.",
+        "option4": "There is no difference.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 6,
+        "question": "Explain the concept of normalization in databases.",
+        "option1": "Organizing data to minimize redundancy and improve data integrity.",
+        "option2": "Sorting data alphabetically.",
+        "option3": "Encrypting data to improve security.",
+        "option4": "Backing up data regularly.",
+        "answer": "option1",
+        "type": "Technical"
+    },
+    {
+        "id": 7,
+        "question": "What is RESTful API?",
+        "option1": "A type of database.",
+        "option2": "A type of web server.",
+        "option3": "An architectural style for building web services.",
+        "option4": "A programming language.",
+        "answer": "option3",
+        "type": "Technical"
+    },
+    {
+        "id": 8,
+        "question": "What is the purpose of version control systems like Git?",
+        "option1": "To encrypt files.",
+        "option2": "To track changes to code and collaborate effectively.",
+        "option3": "To compress files.",
+        "option4": "To manage user accounts.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 9,
+        "question": "What is polymorphism in object-oriented programming?",
+        "option1": "The ability to have multiple constructors.",
+        "option2": "The ability of objects of different classes to respond to the same method call in their own specific way.",
+        "option3": "The ability to inherit properties from a parent class.",
+        "option4": "The ability to hide data members.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 10,
+        "question": "What is the difference between a process and a thread?",
+        "option1": "There is no difference.",
+        "option2": "A process is a program in execution, while a thread is a lightweight unit of execution within a process.",
+        "option3": "A thread is a program in execution, while a process is a lightweight unit of execution within a thread.",
+        "option4": "Processes are always faster than threads.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 11,
+        "question": "Explain the concept of caching.",
+        "option1": "Storing data permanently on a hard drive.",
+        "option2": "Temporarily storing frequently accessed data in a faster storage location to improve performance.",
+        "option3": "Encrypting data to improve security.",
+        "option4": "Compressing data to reduce storage space.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 12,
+        "question": "What is a load balancer and what is its purpose?",
+        "option1": "To encrypt network traffic.",
+        "option2": "To distribute network traffic across multiple servers.",
+        "option3": "To compress network traffic.",
+        "option4": "To monitor network traffic.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 13,
+        "question": "What is an API gateway?",
+        "option1": "A type of database.",
+        "option2": "A reverse proxy that acts as a single entry point for all clients to access internal APIs.",
+        "option3": "A type of network switch.",
+        "option4": "A security protocol.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 14,
+        "question": "What is the difference between HTTP and HTTPS?",
+        "option1": "HTTP is faster than HTTPS.",
+        "option2": "HTTPS uses encryption; HTTP does not.",
+        "option3": "HTTP is used for email; HTTPS is used for web browsing.",
+        "option4": "There is no difference.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 15,
+        "question": "Explain the concept of ACID properties in database transactions.",
+        "option1": "Atomicity, Consistency, Isolation, Durability.",
+        "option2": "Accuracy, Completeness, Integrity, Dependability.",
+        "option3": "Availability, Consistency, Isolation, Durability.",
+        "option4": "Atomicity, Capacity, Integrity, Durability.",
+        "answer": "option1",
+        "type": "Technical"
+    },
+    {
+        "id": 1,
+        "question": "A company's profit increased by 20% this year. If last year's profit was $100,000, what is this year's profit?",
+        "option1": "$120,000",
+        "option2": "$110,000",
+        "option3": "$80,000",
+        "option4": "$150,000",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 2,
+        "question": "If a train travels at 60 mph for 2 hours and then 80 mph for 3 hours, what is the average speed of the train?",
+        "option1": "70 mph",
+        "option2": "72 mph",
+        "option3": "65 mph",
+        "option4": "68 mph",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 3,
+        "question": "A rectangular garden is 12 meters long and 8 meters wide. What is its perimeter?",
+        "option1": "20 meters",
+        "option2": "40 meters",
+        "option3": "96 square meters",
+        "option4": "24 square meters",
+        "answer": "option2",
+        "type": "Aptitude"
+    },
+    {
+        "id": 4,
+        "question": "What is the next number in the sequence: 2, 5, 10, 17, 26?",
+        "option1": "37",
+        "option2": "36",
+        "option3": "35",
+        "option4": "38",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 5,
+        "question": "Solve for x: 3x + 7 = 16",
+        "option1": "x = 3",
+        "option2": "x = 9",
+        "option3": "x = 7",
+        "option4": "x = 23/3",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 6,
+        "question": "If 15% of a number is 30, what is the number?",
+        "option1": "50",
+        "option2": "100",
+        "option3": "200",
+        "option4": "20",
+        "answer": "option3",
+        "type": "Aptitude"
+    },
+    {
+        "id": 7,
+        "question": "A circle has a diameter of 14 cm. What is its area (use \u03c0 = 22/7)?",
+        "option1": "154 sq cm",
+        "option2": "44 sq cm",
+        "option3": "77 sq cm",
+        "option4": "88 sq cm",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 8,
+        "question": "Two angles are complementary. One angle is 30 degrees. What is the measure of the other angle?",
+        "option1": "60 degrees",
+        "option2": "150 degrees",
+        "option3": "30 degrees",
+        "option4": "90 degrees",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 9,
+        "question": "What is the square root of 169?",
+        "option1": "13",
+        "option2": "17",
+        "option3": "14",
+        "option4": "12",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 10,
+        "question": "A bag contains 5 red marbles and 3 blue marbles. What is the probability of picking a red marble?",
+        "option1": "5/8",
+        "option2": "3/8",
+        "option3": "5/3",
+        "option4": "3/5",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 11,
+        "question": "If a car travels 240 miles in 4 hours, what is its speed in miles per hour?",
+        "option1": "60 mph",
+        "option2": "120 mph",
+        "option3": "240 mph",
+        "option4": "80 mph",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 12,
+        "question": "What is 25% of 80?",
+        "option1": "20",
+        "option2": "40",
+        "option3": "60",
+        "option4": "10",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 13,
+        "question": "If a rectangle has an area of 48 square meters and a length of 12 meters, what is its width?",
+        "option1": "4 meters",
+        "option2": "6 meters",
+        "option3": "8 meters",
+        "option4": "12 meters",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 14,
+        "question": "A shop sold 20% of its 500 items. How many items are left?",
+        "option1": "400",
+        "option2": "300",
+        "option3": "100",
+        "option4": "200",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 15,
+        "question": "Solve for y:  2y - 5 = 11",
+        "option1": "y = 8",
+        "option2": "y = 3",
+        "option3": "y = 16",
+        "option4": "y = 6",
+        "answer": "option1",
+        "type": "Aptitude"
+    }
+]

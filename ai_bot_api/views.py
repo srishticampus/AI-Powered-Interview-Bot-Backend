@@ -8,6 +8,15 @@ from .models import CustomUser, AddJob, AddCompanies
 from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer, JobApplication, JobApplicationSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
+import os
+import json
+import re
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
+from PyPDF2 import PdfReader
+import google.generativeai as genai
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -192,3 +201,138 @@ class DeleteJobView(APIView):
         job = get_object_or_404(AddJob, id=job_id)
         job.delete()
         return Response({"message":"job deleted successfully"}, status=status.HTTP_200_OK)
+    
+
+
+# Configure Gemini API key
+genai.configure(api_key="AIzaSyBY0bcSaO-DK3A72g0GhdzNCWk6I_1RSqo")
+
+# MCQ storage folder
+MCQ_FOLDER = os.path.join(settings.MEDIA_ROOT, "mcq_questions")
+os.makedirs(MCQ_FOLDER, exist_ok=True)
+
+
+def extract_text_from_pdf(pdf_path):
+    """Extracts text from a PDF resume."""
+    pdf_reader = PdfReader(pdf_path)
+    text = "".join([page.extract_text() or "" for page in pdf_reader.pages])
+    return text.strip()
+
+
+def gemini_request(prompt):
+    """Send a request to Gemini AI and return response text."""
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    response = model.generate_content(prompt)
+
+    try:
+        return response.text.strip()
+    except (AttributeError, IndexError):
+        return "Error: Unable to process request."
+
+
+def suggest_job_titles(text):
+    """Suggests relevant job roles based on resume content."""
+    query = f"Suggest job roles that best match the following resume:\n\n{text}"
+    response = gemini_request(query)
+
+    job_titles = re.findall(r"^\d*\.*\s*\*\*(.*?)\*\*", response, re.MULTILINE)
+    return [title.strip().rstrip(":") for title in job_titles if title.strip()] if job_titles else []
+
+
+def generate_mcq_questions(job_title, difficulty="Medium"):
+    """Generates 15 technical and 15 aptitude MCQs for a given job title."""
+
+    # Request Technical Questions
+    tech_query = f"""
+    Generate 15 multiple-choice technical interview questions for the job title '{job_title}' with {difficulty} difficulty.
+    
+    Format output in JSON as:
+    [
+      {{"id": 1, "question": "Tech Question 1?", "option1": "A", "option2": "B", "option3": "C", "option4": "D", "answer": "option2", "type": "Technical"}},
+      ...
+    ]
+    """
+    tech_response = gemini_request(tech_query)
+    tech_questions = extract_json(tech_response)
+
+    # Request Aptitude Questions
+    aptitude_query = f"""
+    Generate 15 multiple-choice aptitude test questions relevant to the job title '{job_title}' with {difficulty} difficulty.
+    
+    Format output in JSON as:
+    [
+      {{"id": 16, "question": "Aptitude Question 1?", "option1": "A", "option2": "B", "option3": "C", "option4": "D", "answer": "option1", "type": "Aptitude"}},
+      ...
+    ]
+    """
+    aptitude_response = gemini_request(aptitude_query)
+    aptitude_questions = extract_json(aptitude_response)
+
+    # Combine both question sets
+    mcq_questions = tech_questions + aptitude_questions
+
+    if len(mcq_questions) == 30:
+        return mcq_questions
+    return []
+
+
+def extract_json(text):
+    """Extracts JSON content from AI response."""
+    match = re.search(r"\[\s*{.*}\s*\]", text, re.DOTALL)
+    try:
+        return json.loads(match.group(0)) if match else []
+    except json.JSONDecodeError:
+        return []
+
+
+def save_json_file(content, job_title):
+    """Saves generated MCQs into a JSON file."""
+    safe_title = re.sub(r"[^a-zA-Z0-9_]", "_", job_title)
+    filename = os.path.join(MCQ_FOLDER, f"{safe_title}_mcqs.json")
+
+    with open(filename, "w", encoding="utf-8") as file:
+        json.dump(content, file, indent=4)
+
+    return filename
+
+
+@csrf_exempt
+def generate_mcqs_from_resume(request, user_id):
+    """API to generate MCQs from a user's resume."""
+    user = get_object_or_404(CustomUser, id=user_id)
+
+    if not user.resume:
+        return JsonResponse({"error": "No resume found for this user"}, status=404)
+
+    resume_path = os.path.join(settings.MEDIA_ROOT, str(user.resume))
+    if not os.path.exists(resume_path):
+        return JsonResponse({"error": "Resume file not found"}, status=404)
+
+    resume_text = extract_text_from_pdf(resume_path)
+    job_titles = suggest_job_titles(resume_text)
+
+    if not job_titles:
+        return JsonResponse({"error": "No job titles identified in resume"}, status=400)
+
+    job_title = job_titles[0]  
+    mcq_questions = generate_mcq_questions(job_title)
+
+    if not mcq_questions:
+        return JsonResponse({"error": "Failed to generate MCQs"}, status=500)
+
+    mcq_file_path = save_json_file(mcq_questions, job_title)
+    return JsonResponse({"message": "MCQs generated", "mcq_file": mcq_file_path})
+
+
+@csrf_exempt
+def get_mcq_file(request, filename):
+    """API to download the generated MCQ JSON file."""
+    file_path = os.path.join(MCQ_FOLDER, filename)
+
+    if not os.path.exists(file_path):
+        return JsonResponse({"error": "File not found"}, status=404)
+
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    return JsonResponse({"mcqs": data})
