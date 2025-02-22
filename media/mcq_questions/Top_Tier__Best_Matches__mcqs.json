@@ -1,0 +1,302 @@
+[
+    {
+        "id": 1,
+        "question": "What is the time complexity of a binary search algorithm in the best case?",
+        "option1": "O(n)",
+        "option2": "O(1)",
+        "option3": "O(log n)",
+        "option4": "O(n^2)",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 2,
+        "question": "Which data structure is best suited for implementing a Last-In-First-Out (LIFO) structure?",
+        "option1": "Queue",
+        "option2": "Stack",
+        "option3": "Linked List",
+        "option4": "Heap",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 3,
+        "question": "What is the purpose of a hash table?",
+        "option1": "To sort data in ascending order",
+        "option2": "To provide fast key-value lookups",
+        "option3": "To implement a depth-first search",
+        "option4": "To represent a graph",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 4,
+        "question": "Explain the difference between breadth-first search (BFS) and depth-first search (DFS).",
+        "option1": "BFS uses a stack, DFS uses a queue.",
+        "option2": "BFS explores nodes level by level, DFS explores one branch completely before moving to another.",
+        "option3": "BFS is faster than DFS in all cases.",
+        "option4": "DFS is faster than BFS in all cases.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 5,
+        "question": "What is the difference between an interface and an abstract class in Java?",
+        "option1": "Interfaces can have method implementations, abstract classes cannot.",
+        "option2": "Abstract classes can have instance variables, interfaces cannot.",
+        "option3": "There is no difference.",
+        "option4": "Interfaces can only have abstract methods, abstract classes can have concrete methods.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 6,
+        "question": "What is polymorphism?",
+        "option1": "The ability to create new classes from existing classes.",
+        "option2": "The ability of an object to take on many forms.",
+        "option3": "The ability to store multiple data types in a single variable.",
+        "option4": "The ability to hide data from unauthorized access.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 7,
+        "question": "What is the difference between a GET and POST HTTP request?",
+        "option1": "GET requests are used to send data to the server, POST requests are used to retrieve data from the server.",
+        "option2": "GET requests are typically used for retrieving data, POST requests are used for submitting data to be processed.",
+        "option3": "GET requests are more secure than POST requests.",
+        "option4": "There is no difference between GET and POST requests.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 8,
+        "question": "What is SQL injection?",
+        "option1": "A type of virus.",
+        "option2": "A technique to exploit vulnerabilities in database applications.",
+        "option3": "A programming language.",
+        "option4": "A type of network attack.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 9,
+        "question": "What is RESTful API?",
+        "option1": "A type of database.",
+        "option2": "A set of constraints for designing networked applications.",
+        "option3": "A type of programming language.",
+        "option4": "An architectural style for building web services.",
+        "answer": "option4",
+        "type": "Technical"
+    },
+    {
+        "id": 10,
+        "question": "Explain the concept of normalization in databases.",
+        "option1": "Ensuring data consistency by reducing redundancy.",
+        "option2": "Optimizing database performance by increasing redundancy.",
+        "option3": "Backing up database data regularly.",
+        "option4": "Creating indexes on database tables.",
+        "answer": "option1",
+        "type": "Technical"
+    },
+    {
+        "id": 11,
+        "question": "What is a deadlock in concurrent programming?",
+        "option1": "A situation where two or more processes are blocked indefinitely, waiting for each other.",
+        "option2": "A bug in the operating system.",
+        "option3": "A type of memory leak.",
+        "option4": "A performance optimization technique.",
+        "answer": "option1",
+        "type": "Technical"
+    },
+    {
+        "id": 12,
+        "question": "What is the purpose of a mutex?",
+        "option1": "To allow multiple threads to access a shared resource simultaneously.",
+        "option2": "To prevent multiple threads from accessing a shared resource simultaneously.",
+        "option3": "To synchronize the execution of threads.",
+        "option4": "To manage memory allocation.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 13,
+        "question": "What is the difference between TCP and UDP?",
+        "option1": "TCP is connectionless, UDP is connection-oriented.",
+        "option2": "TCP is connection-oriented, UDP is connectionless.",
+        "option3": "TCP is faster than UDP.",
+        "option4": "UDP is more reliable than TCP.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 14,
+        "question": "What is a software design pattern?",
+        "option1": "A specific programming language.",
+        "option2": "A reusable solution to a commonly occurring design problem.",
+        "option3": "A type of database.",
+        "option4": "A specific algorithm.",
+        "answer": "option2",
+        "type": "Technical"
+    },
+    {
+        "id": 15,
+        "question": "What is version control?",
+        "option1": "A method of tracking changes to a software project.",
+        "option2": "A type of security software.",
+        "option3": "A method for compiling code.",
+        "option4": "A type of debugging tool.",
+        "answer": "option1",
+        "type": "Technical"
+    },
+    {
+        "id": 1,
+        "question": "A train travels 300 miles in 5 hours. What is its average speed in miles per hour?",
+        "option1": "60 mph",
+        "option2": "50 mph",
+        "option3": "75 mph",
+        "option4": "1500 mph",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 2,
+        "question": "If a company's profit increased by 20% this year and then decreased by 10% next year, what is the net percentage change over the two years?",
+        "option1": "10% increase",
+        "option2": "8% increase",
+        "option3": "18% increase",
+        "option4": "10% decrease",
+        "answer": "option2",
+        "type": "Aptitude"
+    },
+    {
+        "id": 3,
+        "question": "What is the next number in the sequence: 2, 6, 18, 54, ...?",
+        "option1": "108",
+        "option2": "162",
+        "option3": "216",
+        "option4": "81",
+        "answer": "option2",
+        "type": "Aptitude"
+    },
+    {
+        "id": 4,
+        "question": "A rectangular garden is 12 meters long and 8 meters wide. What is its area in square meters?",
+        "option1": "20 sq m",
+        "option2": "40 sq m",
+        "option3": "96 sq m",
+        "option4": "24 sq m",
+        "answer": "option3",
+        "type": "Aptitude"
+    },
+    {
+        "id": 5,
+        "question": "If x + 5 = 12, what is the value of x?",
+        "option1": "7",
+        "option2": "17",
+        "option3": "6",
+        "option4": "-7",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 6,
+        "question": "A circle has a diameter of 10cm. What is its radius?",
+        "option1": "5cm",
+        "option2": "10cm",
+        "option3": "20cm",
+        "option4": "25cm",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 7,
+        "question": "John can complete a task in 3 hours. Mary can complete the same task in 6 hours.  If they work together, how long will it take them to complete the task?",
+        "option1": "1.5 hours",
+        "option2": "2 hours",
+        "option3": "4.5 hours",
+        "option4": "9 hours",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 8,
+        "question": "What is 30% of 200?",
+        "option1": "60",
+        "option2": "70",
+        "option3": "30",
+        "option4": "140",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 9,
+        "question": "Solve for x: 2x + 4 = 10",
+        "option1": "3",
+        "option2": "7",
+        "option3": "2",
+        "option4": "6",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 10,
+        "question": "A bag contains 5 red marbles and 3 blue marbles. What is the probability of drawing a red marble?",
+        "option1": "5/8",
+        "option2": "3/8",
+        "option3": "5/3",
+        "option4": "3/5",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 11,
+        "question": "If a car travels at an average speed of 60 km/h for 2 hours, how far does it travel?",
+        "option1": "30 km",
+        "option2": "120 km",
+        "option3": "60 km",
+        "option4": "180 km",
+        "answer": "option2",
+        "type": "Aptitude"
+    },
+    {
+        "id": 12,
+        "question": "What is the square root of 64?",
+        "option1": "8",
+        "option2": "16",
+        "option3": "32",
+        "option4": "4",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 13,
+        "question": "Simplify the fraction: 12/18",
+        "option1": "2/3",
+        "option2": "3/2",
+        "option3": "6/9",
+        "option4": "1/2",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 14,
+        "question": "If 5% of a number is 10, what is the number?",
+        "option1": "200",
+        "option2": "50",
+        "option3": "105",
+        "option4": "20",
+        "answer": "option1",
+        "type": "Aptitude"
+    },
+    {
+        "id": 15,
+        "question": "A cube has 6 sides. How many vertices (corners) does it have?",
+        "option1": "6",
+        "option2": "8",
+        "option3": "12",
+        "option4": "10",
+        "answer": "option2",
+        "type": "Aptitude"
+    }
+]

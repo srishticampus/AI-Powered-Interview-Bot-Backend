@@ -305,23 +305,25 @@ def generate_mcqs_from_resume(request, user_id):
         return JsonResponse({"error": "No resume found for this user"}, status=404)
 
     resume_path = os.path.join(settings.MEDIA_ROOT, str(user.resume))
-    if not os.path.exists(resume_path):
-        return JsonResponse({"error": "Resume file not found"}, status=404)
 
-    resume_text = extract_text_from_pdf(resume_path)
-    job_titles = suggest_job_titles(resume_text)
+    try:
+        resume_text = extract_text_from_pdf(resume_path)
+        job_titles = suggest_job_titles(resume_text)
 
-    if not job_titles:
-        return JsonResponse({"error": "No job titles identified in resume"}, status=400)
+        if not job_titles:
+            return JsonResponse({"error": "Failed to identify suitable job roles"}, status=400)
 
-    job_title = job_titles[0]  
-    mcq_questions = generate_mcq_questions(job_title)
+        job_title = job_titles[0]  
+        mcqs = generate_mcq_questions(job_title)
 
-    if not mcq_questions:
-        return JsonResponse({"error": "Failed to generate MCQs"}, status=500)
+        if mcqs:
+            return JsonResponse({"job_title": job_title, "mcqs": mcqs}, status=200)
+        else:
+            return JsonResponse({"error": "Failed to generate MCQs"}, status=400)
 
-    mcq_file_path = save_json_file(mcq_questions, job_title)
-    return JsonResponse({"message": "MCQs generated", "mcq_file": mcq_file_path})
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
 
 
 @csrf_exempt
