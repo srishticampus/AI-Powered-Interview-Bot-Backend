@@ -78,6 +78,9 @@ class ResetPasswordSerializer(serializers.Serializer):
     
 
 class JobApplicationSerializer(serializers.ModelSerializer):
+    user_details = UserSerializer(source='user', read_only=True)
+    job_details = AddJobSerializer(source='job', read_only=True)
+
     class Meta:
         model = JobApplication
-        fields = ['id', 'user', 'job', 'applied_at', 'status']
+        fields = ['id', 'user', 'job', 'applied_at', 'status', 'user_details', 'job_details']

@@ -158,13 +158,18 @@ class UpdateApplicationStatusView(APIView):
         new_status = request.data.get('status')
 
         if new_status not in ['accepted', 'rejected']:
-            return Response({"error":"invalid status"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Invalid status"}, status=status.HTTP_400_BAD_REQUEST)
         
         application = get_object_or_404(JobApplication, id=application_id)
         application.status = new_status
         application.save()
 
-        return Response({"message":f"application {new_status} successfully"}, status=status.HTTP_200_OK)
+        serializer = JobApplicationSerializer(application)
+        return Response({
+            "message": f"Application {new_status} successfully",
+            "application": serializer.data
+        }, status=status.HTTP_200_OK)
+
     
 class AllAppliedjobsView(APIView):
     def get(self, request):
