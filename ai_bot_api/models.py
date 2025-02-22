@@ -38,6 +38,7 @@ class AddJob(models.Model):
     salary_range = models.CharField(max_length=255)
     job_description = models.TextField()
     application_deadline = models.CharField(max_length=255)
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.job_title
@@ -47,6 +48,7 @@ class JobApplication(models.Model):
     job = models.ForeignKey(AddJob, on_delete=models.CASCADE)
     applied_at = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=25, choices=[("pending","pending"), ("accepted","accepted"), ("rejected","rejected")], default="pending")
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.job.job_title}"   
