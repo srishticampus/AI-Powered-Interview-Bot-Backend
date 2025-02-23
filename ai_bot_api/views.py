@@ -318,7 +318,12 @@ def generate_mcqs_from_resume(request, user_id):
         if not job_titles:
             return JsonResponse({"error": "Failed to identify suitable job roles"}, status=400)
 
-        job_title = job_titles[0]  
+        
+        if len(job_titles) > 1:
+            job_title = job_titles[1] 
+        else:
+            job_title = job_titles[0]
+
         mcqs = generate_mcq_questions(job_title)
 
         if mcqs:
