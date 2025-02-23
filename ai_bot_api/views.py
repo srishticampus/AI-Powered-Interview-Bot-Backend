@@ -247,7 +247,7 @@ def suggest_job_titles(text):
 def generate_mcq_questions(job_title, difficulty="Medium"):
     """Generates 15 technical and 15 aptitude MCQs for a given job title."""
 
-    # Request Technical Questions
+
     tech_query = f"""
     Generate 15 multiple-choice technical interview questions for the job title '{job_title}' with {difficulty} difficulty.
     
@@ -273,12 +273,13 @@ def generate_mcq_questions(job_title, difficulty="Medium"):
     aptitude_response = gemini_request(aptitude_query)
     aptitude_questions = extract_json(aptitude_response)
 
-    # Combine both question sets
+    for idx, question in enumerate(aptitude_questions, start=len(tech_questions) + 1):
+        question["id"] = idx
+
+   
     mcq_questions = tech_questions + aptitude_questions
 
-    if len(mcq_questions) == 30:
-        return mcq_questions
-    return []
+    return mcq_questions if len(mcq_questions) == 30 else []
 
 
 def extract_json(text):
