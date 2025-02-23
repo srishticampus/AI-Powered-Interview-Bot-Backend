@@ -52,3 +52,12 @@ class JobApplication(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.job.job_title}"   
+    
+class ExamScore(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    application = models.ForeignKey('JobApplication', on_delete=models.CASCADE)
+    score = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.application.job.job_title} - Score: {self.score}"
