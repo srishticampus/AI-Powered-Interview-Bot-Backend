@@ -55,6 +55,12 @@ class UserDetailView(APIView):
         user = get_object_or_404(CustomUser, id=user_id)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class DeteleUserView(APIView):
+    def delete(self, request, user_id):
+        user = get_object_or_404(CustomUser, id=user_id)
+        user.delete()
+        return Response({"message":"user deleted successfully"}, status=status.HTTP_200_OK)
 
 class AddCompanyView(APIView):
     def post(self, request):
