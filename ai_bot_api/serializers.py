@@ -83,4 +83,4 @@ class JobApplicationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JobApplication
-        fields = ['id', 'user', 'job', 'applied_at', 'status', 'user_details', 'job_details']
+        fields = ['id', 'user', 'job', 'applied_at', 'status', 'user_details', 'job_details', 'score']

@@ -207,7 +207,18 @@ class DeleteJobView(APIView):
         job.delete()
         return Response({"message":"job deleted successfully"}, status=status.HTTP_200_OK)
     
+class UpdateScoreView(APIView):
+    def post(self, request, application_id):
+        score = request.data.get('score')
 
+        if score is None or not isinstance(score, int):
+            return Response({"error": "Invalid score"}, status=status.HTTP_400_BAD_REQUEST)
+
+        application = get_object_or_404(JobApplication, id=application_id)
+        application.score = score
+        application.save()
+
+        return Response({"message": "Score updated successfully", "score": application.score}, status=status.HTTP_200_OK)
 
 # Configure Gemini API key
 genai.configure(api_key="AIzaSyBY0bcSaO-DK3A72g0GhdzNCWk6I_1RSqo")
