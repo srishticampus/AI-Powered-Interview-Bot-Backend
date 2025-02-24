@@ -47,7 +47,19 @@ class JobApplication(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     job = models.ForeignKey(AddJob, on_delete=models.CASCADE)
     applied_at = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=125, choices=[("pending","pending"), ("rejected","rejected"), ("shortlisted","shortlisted"), ("technial_interview","technial_interview"), ("technial_interview_rejected","technial_interview_rejected"), ("hr_interview","hr_interview"), ("hr_interview_rejected","hr_interview_rejected"), ("hr_interview","hr_interview"), ("hr_interview_rejected","hr_interview_rejected"), ("hired","hired")], default="pending")
+    status = models.CharField(max_length=125, choices=[
+        ("pending", "pending"),
+        ("rejected", "rejected"),
+        ("shortlisted", "shortlisted"),
+        ("technial_interview", "technial_interview"),
+        ("technial_interview_rejected", "technial_interview_rejected"),
+        ("hr_interview", "hr_interview"),
+        ("hr_interview_rejected", "hr_interview_rejected"),
+        ("hired", "hired"),
+        ("interview_completed", "interview_completed")
+        ],
+        default="pending")
+    score = models.IntegerField(default=-1)
     created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
