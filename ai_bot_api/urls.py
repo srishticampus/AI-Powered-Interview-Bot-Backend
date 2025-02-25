@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView,LoginView,UserListView,UserDetailView,DeteleUserView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView,CompanyDetailView,JobsListView,JobDetailView,ApplyJobView,UserAppliedJobView,UpdateApplicationStatusView,AllAppliedjobsView,CompanyEditView,DeleteCompanyView,EditJobsView,DeleteJobView,generate_mcqs_from_resume,UpdateScoreView
+from .views import RegisterView,LoginView,UserListView,UserDetailView,DeteleUserView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView,CompanyDetailView,JobsListView,JobDetailView,ApplyJobView,UserAppliedJobView,UpdateApplicationStatusView,AllAppliedjobsView,CompanyEditView,DeleteCompanyView,EditJobsView,DeleteJobView,generate_mcqs_from_resume,UpdateScoreView,AppliedDetailView
 
 
 urlpatterns = [
@@ -24,6 +24,7 @@ urlpatterns = [
      path('user-applied-job/<int:user_id>/',UserAppliedJobView.as_view(), name='user-applied-job'),
      path('update-application-status/',UpdateApplicationStatusView.as_view(), name='update-application-status'),
      path('all-applied-jobs/', AllAppliedjobsView.as_view(), name='all-applied-jobs'),
+     path('application/<int:application_id>/', AppliedDetailView.as_view(), name='application-detail'),
      path('update-score/<int:application_id>/', UpdateScoreView.as_view(), name='update-score'),
      path("generate-mcqs/<int:user_id>/", generate_mcqs_from_resume, name="generate_mcqs"),
 ]

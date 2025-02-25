@@ -183,6 +183,13 @@ class AllAppliedjobsView(APIView):
         applications = JobApplication.objects.all()
         serializer = JobApplicationSerializer(applications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class AppliedDetailView(APIView):
+    def get(self, request, application_id):
+        application = get_object_or_404(JobApplication, id=application_id)
+        serializer = JobApplicationSerializer(application)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     
 class CompanyEditView(APIView):
     def patch(self, request, company_id):
