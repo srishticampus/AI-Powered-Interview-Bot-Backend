@@ -52,6 +52,7 @@ class JobApplication(models.Model):
         ("rejected", "rejected"),
         ("shortlisted", "shortlisted"),
         ("technial_interview", "technial_interview"),
+        ("technial_interview_completed", "technial_interview_completed"),
         ("technial_interview_rejected", "technial_interview_rejected"),
         ("hr_interview", "hr_interview"),
         ("hr_interview_rejected", "hr_interview_rejected"),
