@@ -164,7 +164,7 @@ class UpdateApplicationStatusView(APIView):
         application_id = request.data.get('application_id')
         new_status = request.data.get('status')
 
-        if new_status not in ['rejected', 'shortlisted', 'technial_interview', 'technial_interview_completed', 'technial_interview_rejected', 'hr_interview', 'hr_interview_rejected', 'hired']:
+        if new_status not in ['rejected', 'shortlisted', 'technical_interview', 'technical_interview_completed', 'technical_interview_rejected', 'hr_interview', 'hr_interview_rejected', 'hired']:
             return Response({"error": "Invalid status"}, status=status.HTTP_400_BAD_REQUEST)
         
         application = get_object_or_404(JobApplication, id=application_id)
