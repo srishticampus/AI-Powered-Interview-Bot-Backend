@@ -253,12 +253,21 @@ def gemini_request(prompt):
 
 
 def suggest_job_titles(text):
-    """Suggests relevant job roles based on resume content."""
-    query = f"Suggest job roles that best match the following resume:\n\n{text}"
+    """Extracts job titles from Gemini response and returns a cleaned list."""
+    query = f"Suggest job roles that best match the following resume. Rank them from most relevant to least relevant:\n\n{text}"
+    
     response = gemini_request(query)
 
+    # Extract job titles (ignoring headers like 'Tier 1', 'Tier 2', etc.)
     job_titles = re.findall(r"^\d*\.*\s*\*\*(.*?)\*\*", response, re.MULTILINE)
-    return [title.strip().rstrip(":") for title in job_titles if title.strip()] if job_titles else []
+
+    # Remove tier headers (like 'Tier 1: Most Relevant')
+    filtered_titles = [title for title in job_titles if not re.match(r"^Tier\s*\d+", title, re.IGNORECASE)]
+
+    if filtered_titles:
+        return [title.strip().rstrip(":") for title in filtered_titles if title.strip()]
+    
+    return []
 
 
 def generate_mcq_questions(job_title, difficulty="Medium"):
@@ -333,19 +342,18 @@ def generate_mcqs_from_resume(request, user_id):
         resume_text = extract_text_from_pdf(resume_path)
         job_titles = suggest_job_titles(resume_text)
 
+
+
         if not job_titles:
             return JsonResponse({"error": "Failed to identify suitable job roles"}, status=400)
 
         
-        if len(job_titles) > 1:
-            job_title = job_titles[1] 
-        else:
-            job_title = job_titles[0]
-
-        mcqs = generate_mcq_questions(job_title)
+        
+        preferred_job_title = job_titles[1]
+        mcqs = generate_mcq_questions(preferred_job_title)
 
         if mcqs:
-            return JsonResponse({"job_title": job_title, "mcqs": mcqs}, status=200)
+            return JsonResponse({"job_title": preferred_job_title, "mcqs": mcqs}, status=200)
         else:
             return JsonResponse({"error": "Failed to generate MCQs"}, status=400)
 
