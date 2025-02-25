@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-pin9d&v0ebf%&m))=%lkpck2hyrfgxu9@7+6i(_#bx8jr(v@_k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "python.sicsglobal.in",
+    "hybrid.srishticampus.in",
+]
 
 
 # Application definition
@@ -122,9 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
-
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -140,4 +143,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost:5174",
     "http://localhost:5175",
+    "https://hybrid.srishticampus.in"
 ]
