@@ -1,7 +1,7 @@
 services:
   django_backend:
     build: ./
-    container_name: ai_phishing_django
+    container_name: ai_powered_interview_bot_django
     volumes:
       - ./:/code  # Maps the host's  directory to /code in the container
       - ./staticfiles:/code/staticfiles
