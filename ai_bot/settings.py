@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
     "hybrid.srishticampus.in",
 ]
 
-
+FORCE_SCRIPT_NAME = '/ai_powered_interview_bot'
 # Application definition
 
 INSTALLED_APPS = [

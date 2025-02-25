@@ -1,0 +1,10 @@
+services:
+  django_backend:
+    build: ./
+    container_name: ai_phishing_django
+    volumes:
+      - ./:/code  # Maps the host's  directory to /code in the container
+      - ./staticfiles:/code/staticfiles
+    ports:
+      - "8003:8000"
+    restart: always
