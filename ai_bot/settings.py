@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "python.sicsglobal.in",
-    "hybrid.srishticampus.in",
+    "hybrid.srishticampus.com",
 ]
 
 FORCE_SCRIPT_NAME = '/ai_powered_interview_bot'
