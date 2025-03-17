@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 absl-py==2.1.0
 aiohappyeyeballs==2.4.6
 aiohttp==3.11.12
@@ -254,3 +255,21 @@ wrapt==1.14.1
 xhtml2pdf==0.2.11
 yarl==1.18.3
 zstandard==0.23.0
+=======
+# Core Django
+Django==5.1.5
+
+# Django REST Framework
+djangorestframework==3.14.0
+
+# CORS Headers
+django-cors-headers==4.3.1
+
+# Image Processing (if using ImageField)
+Pillow==10.1.0
+
+# Environment Variables
+python-dotenv==1.0.0    # For managing environment variables
+PyPDF2==3.0.1
+google-generativeai==0.3.2
+>>>>>>> 15843592331d1fe85921988df74756fb4cb5a84c
