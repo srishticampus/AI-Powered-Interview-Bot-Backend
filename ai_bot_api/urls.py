@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterView,LoginView,UserListView,UserDetailView,DeteleUserView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView,CompanyDetailView,JobsListView,JobDetailView,ApplyJobView,UserAppliedJobView,UpdateApplicationStatusView,AllAppliedjobsView,CompanyEditView,DeleteCompanyView,EditJobsView,DeleteJobView,generate_mcqs_from_resume,UpdateScoreView,AppliedDetailView
+from .views import RegisterView,LoginView,UserListView,UserDetailView,DeteleUserView,AddCompanyView,ResetPasswordView,AddJobView,UserMatchedJobsView,CompaniesListView,CompanyDetailView,JobsListView,JobDetailView,ApplyJobView,UserAppliedJobView,UpdateApplicationStatusView,AllAppliedjobsView,CompanyEditView,DeleteCompanyView,EditJobsView,DeleteJobView,generate_mcqs_from_resume,UpdateScoreView,AppliedDetailView,EmotionDetectionView
 
 
 urlpatterns = [
@@ -27,4 +27,6 @@ urlpatterns = [
      path('application/<int:application_id>/', AppliedDetailView.as_view(), name='application-detail'),
      path('update-score/<int:application_id>/', UpdateScoreView.as_view(), name='update-score'),
      path("generate-mcqs/<int:user_id>/", generate_mcqs_from_resume, name="generate_mcqs"),
+     path("emotion-detection/", EmotionDetectionView.as_view(), name="emotion-detection"),
+
 ]

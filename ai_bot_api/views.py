@@ -382,3 +382,55 @@ def get_mcq_file(request, filename):
         data = json.load(file)
 
     return JsonResponse({"mcqs": data})
+
+import cv2
+import numpy as np
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from keras.preprocessing.image import img_to_array
+from tensorflow.keras.models import load_model
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from PIL import Image
+import io
+
+# Load Model and Face Detector
+face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+classifier = load_model('model3.h5')
+emotion_labels = ['Angry', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
+
+class EmotionDetectionView(APIView):
+    def post(self, request):
+        image_file = request.FILES.get("image")
+
+        if not image_file:
+            return Response({"error": "No image uploaded"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Convert Image File to OpenCV Format
+        image_stream = io.BytesIO(image_file.read())
+        image_pil = Image.open(image_stream).convert("RGB")
+        image_np = np.array(image_pil)
+        image_cv = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+
+        # Convert to Grayscale
+        gray = cv2.cvtColor(image_cv, cv2.COLOR_BGR2GRAY)
+        faces = face_classifier.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+
+        if len(faces) == 0:
+            return Response({"error": "No face detected"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Process Detected Faces
+        for (x, y, w, h) in faces:
+            roi_gray = gray[y:y + h, x:x + w]
+            roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA)
+
+            roi = roi_gray.astype("float") / 255.0
+            roi = img_to_array(roi)
+            roi = np.expand_dims(roi, axis=0)
+
+            prediction = classifier.predict(roi)[0]
+            label = emotion_labels[prediction.argmax()]
+
+            return Response({"emotion": label}, status=status.HTTP_200_OK)
+
+        return Response({"error": "Face processing failed"}, status=status.HTTP_400_BAD_REQUEST)
