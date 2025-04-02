@@ -28,5 +28,6 @@ urlpatterns = [
      path('update-score/<int:application_id>/', UpdateScoreView.as_view(), name='update-score'),
      path("generate-mcqs/<int:user_id>/", generate_mcqs_from_resume, name="generate_mcqs"),
      path("emotion-detection/", EmotionDetectionView.as_view(), name="emotion-detection"),
+     
 
 ]

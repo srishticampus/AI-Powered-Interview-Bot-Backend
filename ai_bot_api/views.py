@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import RegistrationSerializer
 from django.contrib.auth import authenticate
-from .models import CustomUser, AddJob, AddCompanies
+from .models import CustomUser, AddJob, AddCompanies, DetectedEmotion
 from .serializers import UserSerializer, AddCompanySerializer, ResetPasswordSerializer, AddJobSerializer, JobApplication, JobApplicationSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.authtoken.models import Token
@@ -393,6 +393,8 @@ from tensorflow.keras.models import load_model
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image
 import io
+from django.http import JsonResponse, HttpResponse
+
 
 # Load Model and Face Detector
 face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -400,6 +402,8 @@ classifier = load_model('model3.h5')
 emotion_labels = ['Angry', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 
 class EmotionDetectionView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
     def post(self, request):
         image_file = request.FILES.get("image")
 
@@ -419,7 +423,8 @@ class EmotionDetectionView(APIView):
         if len(faces) == 0:
             return Response({"error": "No face detected"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Process Detected Faces
+        detected_emotions = []
+        
         for (x, y, w, h) in faces:
             roi_gray = gray[y:y + h, x:x + w]
             roi_gray = cv2.resize(roi_gray, (48, 48), interpolation=cv2.INTER_AREA)
@@ -430,7 +435,15 @@ class EmotionDetectionView(APIView):
 
             prediction = classifier.predict(roi)[0]
             label = emotion_labels[prediction.argmax()]
+            detected_emotions.append(label)
 
-            return Response({"emotion": label}, status=status.HTTP_200_OK)
+            # Store the detected emotion in the database
+            DetectedEmotion.objects.create(emotion=label)
 
-        return Response({"error": "Face processing failed"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"detected_emotions": detected_emotions}, status=status.HTTP_200_OK)
+    
+class EmotionHistoryView(APIView):
+    def get(self, request):
+        emotions = DetectedEmotion.objects.all().order_by("-timestamp")[:10]
+        data = [{"emotion": e.emotion, "timestamp": e.timestamp} for e in emotions]
+        return Response(data, status=status.HTTP_200_OK)
